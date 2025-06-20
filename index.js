@@ -1,4 +1,6 @@
 require('dotenv').config(); // Load environment variables from .env
+console.log("DB_PASS from .env:", process.env.DB_PASS);
+
 
 require("reflect-metadata");
 const express = require("express");
@@ -69,13 +71,13 @@ const OrderItemEntity = new EntitySchema({
 
 // Function to ensure the target database exists; if not, create it.
 async function ensureDatabaseExists() {
-  const targetDB = process.env.DB_NAME || "mikes_macaroon_market";
+  const targetDB = process.env.DB_NAME || "dotgenerate";
   const dbConfig = {
     host: process.env.DB_HOST || "localhost",
     port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
     ssl: (process.env.DB_HOST && process.env.DB_HOST != 'localhost') ? { ca: fs.readFileSync('global-bundle.pem').toString() } : false,
     user: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASS || "postgres",
+    password: process.env.DB_PASS || "root",
     database: "postgres" // Connect to the default database
   };
 
